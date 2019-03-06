@@ -10,19 +10,31 @@ import com.accenture.test.util.compare.ValueComparator;
 import com.accenture.test.util.domain.TestCases;
 import com.accenture.test.util.domain.TestData;
 
+/**
+ * Runs the tests.
+ * 
+ * @author Peter Izso
+ *
+ */
 @Component
-public class DataBaseChecker {
+public class TestRunner {
 
     private final ValueComparator valueComparator;
     private final Logger logger;
     private final SoftAssertions softly;
 
-    public DataBaseChecker(ValueComparator valueComparator, Logger logger, SoftAssertions softly) {
+    public TestRunner(ValueComparator valueComparator, Logger logger, SoftAssertions softly) {
         this.valueComparator = valueComparator;
         this.logger = logger;
         this.softly = softly;
     }
 
+    /**
+     * Run the tests using the {@link TestCases} provided by the test case.
+     * 
+     * @param testCases
+     *            {@link TestCases} provided by the test case.
+     */
     public void runTestCase(TestCases testCases) {
         logger.info(String.format("Running the test case '%s'", testCases.getTestName()));
         testCases.getTestData()

@@ -14,6 +14,12 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+ * Reads the input JSON.
+ * 
+ * @author Peter Izso
+ *
+ */
 @Service
 public class JsonReader {
 
@@ -25,6 +31,13 @@ public class JsonReader {
         this.logger = logger;
     }
 
+    /**
+     * Reads the input json, and maps it to {@link TestCases} domain object.
+     * 
+     * @param path
+     *            Path of the JSON file
+     * @return {@link TestCases} domain object
+     */
     public TestCases readJson(String path) {
         try {
             logger.info(String.format("Reading the json: %s", path));

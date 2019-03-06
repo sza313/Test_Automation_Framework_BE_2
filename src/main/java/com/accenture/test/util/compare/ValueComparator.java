@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.accenture.test.util.domain.TestData;
 import com.accenture.test.util.extract.DataBaseValueExtractor;
+import com.accenture.test.util.extract.MoreThanOneResultsException;
 import com.accenture.test.util.extract.TableNameExtractor;
 
 /**
@@ -56,13 +57,8 @@ public class ValueComparator {
                       .containsAllEntriesOf(expectedValues)
                       .hasSameSizeAs(expectedValues);
             }
-        } catch (IllegalStateException e) {
-            if (e.getMessage()
-                 .contains("Duplicate key")) {
-                softly.fail(String.format(FAILURE_MESSAGE_DUPLICATE_KEY, sqlQuery));
-            } else {
-                throw e;
-            }
+        } catch (MoreThanOneResultsException e) {
+            softly.fail(String.format(FAILURE_MESSAGE_DUPLICATE_KEY, sqlQuery));
         }
     }
 }

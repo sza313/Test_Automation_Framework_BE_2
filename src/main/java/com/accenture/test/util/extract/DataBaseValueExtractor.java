@@ -29,6 +29,13 @@ public class DataBaseValueExtractor {
         this.logger = logger;
     }
 
+    /**
+     * Extract the values from the database.
+     * 
+     * @param sqlQuery
+     *            SQL query used
+     * @return column-value pairs as key-value pairs in a map
+     */
     public Map<String, String> extractDBValues(String sqlQuery) {
         logger.info(String.format("Sending SQL query: %s", sqlQuery));
         List<Map<String, String>> result = jdbcTemplate.query(sqlQuery, resultSetMapper);

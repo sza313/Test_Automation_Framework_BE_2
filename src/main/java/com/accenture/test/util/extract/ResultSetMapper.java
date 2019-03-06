@@ -10,6 +10,12 @@ import java.util.stream.IntStream;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
+/**
+ * Custom {@link ResultSet} mapper.
+ * 
+ * @author Peter Izso
+ *
+ */
 @Component
 public class ResultSetMapper implements RowMapper<Map<String, String>> {
 
@@ -23,11 +29,23 @@ public class ResultSetMapper implements RowMapper<Map<String, String>> {
         this.columnValueExtractor = columnValueExtractor;
     }
 
+    /**
+     * The custom mapRow method iterates over the columns, and puts them into a map (column-value pairs).
+     */
     @Override
     public Map<String, String> mapRow(ResultSet resultSet, int rowNum) {
-        return IntStream.range(1, columnCountExtractor.getColumnCount(resultSet) + 1)
-                        .mapToObj(index -> getEntry(resultSet, index))
-                        .collect(Collectors.toMap(Entry::getKey, Entry::getValue));
+        try {
+            return IntStream.range(1, columnCountExtractor.getColumnCount(resultSet) + 1)
+                            .mapToObj(index -> getEntry(resultSet, index))
+                            .collect(Collectors.toMap(Entry::getKey, Entry::getValue));
+        } catch (IllegalStateException e) {
+            if (e.getMessage()
+                 .contains("Duplicate key")) {
+                throw new MoreThanOneResultsException(e);
+            } else {
+                throw e;
+            }
+        }
     }
 
     private Entry<String, String> getEntry(ResultSet resultSet, int index) {

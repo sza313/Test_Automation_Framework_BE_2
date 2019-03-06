@@ -7,16 +7,27 @@ import org.springframework.stereotype.Service;
 
 import com.accenture.test.util.domain.TestData;
 
+/**
+ * Extracts table name.
+ * 
+ * @author Peter Izso
+ *
+ */
 @Service
 public class TableNameExtractor {
 
+    private static final String UNKNOWN = "UNKNOWN";
+
+    /**
+     * Extract the table name from the SQL query.
+     * 
+     * @param testData
+     *            {@link TestData} domain object containing the SQL query
+     * @return name of the table
+     */
     public String extractTableName(TestData testData) {
-        String tableName = "UNKNOWN";
         Matcher matcher = Pattern.compile(".+FROM (.+) WHERE.+")
                                  .matcher(testData.getSqlQuery());
-        if (matcher.matches()) {
-            tableName = matcher.group(1);
-        }
-        return tableName;
+        return matcher.matches() ? matcher.group(1) : UNKNOWN;
     }
 }

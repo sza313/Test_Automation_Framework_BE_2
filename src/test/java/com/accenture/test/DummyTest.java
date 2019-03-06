@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.EnabledIf;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.accenture.test.util.DataBaseChecker;
+import com.accenture.test.util.TestRunner;
 import com.accenture.test.util.domain.TestCases;
 import com.accenture.test.util.read.JsonReader;
 
@@ -18,7 +18,7 @@ public class DummyTest {
     @Autowired
     private JsonReader jsonReader;
     @Autowired
-    private DataBaseChecker dataBaseChecker;
+    private TestRunner testRunner;
 
     @Test
     @EnabledIf("${tests.dummy.enabled:false}")
@@ -27,6 +27,6 @@ public class DummyTest {
         TestCases testCases = jsonReader.readJson("src/test/resources/dummyTest.json");
 
         // WHEN/THEN
-        dataBaseChecker.runTestCase(testCases);
+        testRunner.runTestCase(testCases);
     }
 }
