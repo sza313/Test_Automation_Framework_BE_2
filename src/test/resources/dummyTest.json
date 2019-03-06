@@ -1,0 +1,19 @@
+{
+    "testName": "Dummy Test",
+    "testData": [
+        {
+            "sqlQuery": "SELECT column_name_1, column_name_2 FROM table1 WHERE column_name_1 = 'some value'",
+            "expectedValues": {
+                "COLUMN_NAME_1": "some value",
+                "COLUMN_NAME_2": "other value"
+            }
+        },
+        {
+            "sqlQuery": "SELECT column_name_3, column_name_4 FROM table2 WHERE column_name_3 = 'third value'",
+            "expectedValues": {
+                "COLUMN_NAME_3": "third value",
+                "COLUMN_NAME_4": "any value"
+            }
+        }
+    ]
+}
