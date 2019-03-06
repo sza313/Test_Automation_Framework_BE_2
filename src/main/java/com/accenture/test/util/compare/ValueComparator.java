@@ -43,8 +43,8 @@ public class ValueComparator {
      */
     public void compareValues(TestData testData, String testName, SoftAssertions softly) {
         String sqlQuery = testData.getSqlQuery();
+        String tableName = tableNameExtractor.extractTableName(sqlQuery);
         Map<String, String> expectedValues = testData.getExpectedValues();
-        String tableName = tableNameExtractor.extractTableName(testData);
         try {
             Map<String, String> actualValues = dataBaseValueExtractor.extractDBValues(sqlQuery);
             if (expectedValues.isEmpty()) {

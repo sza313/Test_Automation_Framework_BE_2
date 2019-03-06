@@ -5,8 +5,6 @@ import java.util.regex.Pattern;
 
 import org.springframework.stereotype.Service;
 
-import com.accenture.test.util.domain.TestData;
-
 /**
  * Extracts table name.
  * 
@@ -21,13 +19,13 @@ public class TableNameExtractor {
     /**
      * Extract the table name from the SQL query.
      * 
-     * @param testData
-     *            {@link TestData} domain object containing the SQL query
+     * @param sqlQuery
+     *            SQL query
      * @return name of the table
      */
-    public String extractTableName(TestData testData) {
+    public String extractTableName(String sqlQuery) {
         Matcher matcher = Pattern.compile(".+FROM (.+) WHERE.+")
-                                 .matcher(testData.getSqlQuery());
+                                 .matcher(sqlQuery);
         return matcher.matches() ? matcher.group(1) : UNKNOWN;
     }
 }
