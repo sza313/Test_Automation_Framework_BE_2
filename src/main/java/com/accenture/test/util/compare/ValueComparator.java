@@ -6,8 +6,8 @@ import org.assertj.core.api.SoftAssertions;
 import org.springframework.stereotype.Component;
 
 import com.accenture.test.util.domain.TestData;
+import com.accenture.test.util.exceptions.MoreThanOneResultsException;
 import com.accenture.test.util.extract.DataBaseValueExtractor;
-import com.accenture.test.util.extract.MoreThanOneResultsException;
 import com.accenture.test.util.extract.TableNameExtractor;
 
 /**

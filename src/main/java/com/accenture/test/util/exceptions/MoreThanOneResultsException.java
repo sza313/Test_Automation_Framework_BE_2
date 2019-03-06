@@ -1,4 +1,4 @@
-package com.accenture.test.util.extract;
+package com.accenture.test.util.exceptions;
 
 public class MoreThanOneResultsException extends RuntimeException {
 

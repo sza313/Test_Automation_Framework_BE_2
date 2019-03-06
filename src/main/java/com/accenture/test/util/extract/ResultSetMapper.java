@@ -10,6 +10,8 @@ import java.util.stream.IntStream;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
+import com.accenture.test.util.exceptions.MoreThanOneResultsException;
+
 /**
  * Custom {@link ResultSet} mapper.
  * 
